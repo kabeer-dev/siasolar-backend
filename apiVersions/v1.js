@@ -1,0 +1,11 @@
+const {authMiddleware} = require('../middleware');
+const {usersRoute, publicRoute, privateRoute} = require(`../routes`);
+
+const apiPrefix = '/api/v1/';
+const prepareV1Routes = (app) => {
+  app.use(`${apiPrefix}users`, usersRoute);
+  app.use(`${apiPrefix}public`, publicRoute);
+  app.use(`${apiPrefix}private`, authMiddleware, privateRoute);
+};
+
+module.exports = {apiPrefix, prepareV1Routes};
